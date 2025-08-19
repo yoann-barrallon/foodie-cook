@@ -6,13 +6,14 @@ import { Chip } from "@heroui/chip";
 import { Avatar } from "@heroui/avatar";
 import { Divider } from "@heroui/divider";
 import { Button } from "@heroui/button";
-import { FaClock, FaUsers, FaStar, FaEdit, FaTrash } from "react-icons/fa";
+import { FaClock, FaUsers, FaStar, FaEdit } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 import SocialActions from "./_components/social-actions";
 import { auth } from "@/lib/auth";
 import CommentSection from "./_components/comment-section";
 import { commentService, ratingService } from "@/services";
+import DeleteRecipeButton from "./_components/delete-recipe-button";
 
 interface RecipePageProps {
   params: { id: string };
@@ -50,14 +51,11 @@ export default async function RecipePage({ params }: RecipePageProps) {
         {isAuthor && (
           <div className="flex justify-end gap-2">
             <Link href={`/recipes/${id}/edit`}>
-              <Button
-                color="primary"
-                variant="flat"
-                startContent={<FaEdit />}
-              >
+              <Button color="primary" variant="flat" startContent={<FaEdit />}>
                 Modifier la recette
               </Button>
             </Link>
+            <DeleteRecipeButton recipeId={id} />
           </div>
         )}
 
